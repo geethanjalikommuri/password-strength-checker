@@ -1,6 +1,0 @@
-.feynman
-_human
-tldr
- .el age
-.listify
-.textmode
