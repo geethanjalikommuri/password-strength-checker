@@ -1,0 +1,193 @@
+import { useState } from "react";
+
+function App() {
+  const [playlists, setPlaylists] = useState([]);
+  const [playlistName, setPlaylistName] = useState("");
+  const [description, setDescription] = useState("");
+
+  const createPlaylist = () => {
+    if (!playlistName.trim()) return;
+
+    const newPlaylist = {
+      id: Date.now(),
+      name: playlistName,
+      description: description,
+    };
+
+    setPlaylists([...playlists, newPlaylist]);
+    setPlaylistName("");
+    setDescription("");
+  };
+
+  return (
+    <div
+      className="min-vh-100 position-relative"
+      style={{
+        background:
+          "linear-gradient(135deg, #1e1b4b 0%, #581c87 50%, #7c3aed 100%)",
+        overflow: "hidden",
+      }}
+    >
+      {/* Glow 1 */}
+      <div
+        style={{
+          position: "absolute",
+          width: "400px",
+          height: "400px",
+          background: "#f9a8d4",
+          borderRadius: "50%",
+          filter: "blur(180px)",
+          top: "-100px",
+          left: "-100px",
+          opacity: 0.3,
+        }}
+      />
+
+      {/* Glow 2 */}
+      <div
+        style={{
+          position: "absolute",
+          width: "350px",
+          height: "350px",
+          background: "#93c5fd",
+          borderRadius: "50%",
+          filter: "blur(180px)",
+          bottom: "-100px",
+          right: "-100px",
+          opacity: 0.3,
+        }}
+      />
+
+      <div className="container py-5 position-relative">
+
+        <div className="text-center mb-5">
+          <h1
+            style={{
+              color: "white",
+              fontSize: "5rem",
+              fontWeight: "700",
+              fontFamily: "'Quicksand', sans-serif",
+              textShadow: "0 0 25px rgba(255,255,255,0.3)",
+            }}
+          >
+            🌙 Moonlit Mixes ✨
+          </h1>
+
+          <p
+            style={{
+              color: "#f3e8ff",
+              fontSize: "1.2rem",
+              fontFamily: "'Quicksand', sans-serif",
+            }}
+          >
+            Curate dreamy playlists for every mood, memory, and midnight thought 💜
+          </p>
+        </div>
+
+        <div
+          className="mx-auto p-5"
+          style={{
+            maxWidth: "900px",
+            background: "rgba(255,255,255,0.12)",
+            backdropFilter: "blur(20px)",
+            borderRadius: "35px",
+            border: "1px solid rgba(255,255,255,0.15)",
+            boxShadow: "0 8px 40px rgba(0,0,0,0.2)",
+          }}
+        >
+          <input
+            type="text"
+            className="form-control mb-3"
+            placeholder="🌷 Name your magical playlist..."
+            value={playlistName}
+            onChange={(e) => setPlaylistName(e.target.value)}
+          />
+
+          <textarea
+            rows="4"
+            className="form-control mb-4"
+            placeholder="✨ Tell me the vibe..."
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+
+          <button
+            onClick={createPlaylist}
+            className="btn w-100"
+            style={{
+              background:
+                "linear-gradient(135deg,#f9a8d4,#c084fc)",
+              color: "white",
+              border: "none",
+              borderRadius: "15px",
+              padding: "14px",
+              fontWeight: "bold",
+              fontSize: "1.1rem",
+            }}
+          >
+            🎀 Create Something Beautiful
+          </button>
+        </div>
+
+        <div className="mt-5">
+          <h2
+            className="mb-4"
+            style={{
+              color: "white",
+              fontFamily: "'Quicksand', sans-serif",
+            }}
+          >
+            🌌 My Little Music Universe
+          </h2>
+
+          {playlists.length === 0 ? (
+            <div
+              className="text-center mt-5"
+              style={{
+                color: "#f5d0fe",
+              }}
+            >
+              <h4>🎧 No playlists yet...</h4>
+              <p>Let's create your first musical memory ✨</p>
+            </div>
+          ) : (
+            <div className="row">
+              {playlists.map((playlist) => (
+                <div className="col-md-4 mb-4" key={playlist.id}>
+                  <div
+                    className="card border-0 h-100"
+                    style={{
+                      borderRadius: "25px",
+                      background:
+                        "linear-gradient(135deg,#f9a8d4,#c084fc)",
+                      transition: "0.3s",
+                    }}
+                  >
+                    <div className="card-body">
+                      <div
+                        style={{
+                          height: "170px",
+                          borderRadius: "20px",
+                          background:
+                            "linear-gradient(135deg,#7c3aed,#ec4899)",
+                          marginBottom: "15px",
+                        }}
+                      ></div>
+
+                      <h4 className="fw-bold">{playlist.name}</h4>
+
+                      <p>{playlist.description}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+      </div>
+    </div>
+  );
+}
+
+export default App;
